@@ -42,6 +42,16 @@ app.get('/api/movies', (req, res) => {
       });
     });
   });
+  
+  // route to create
+        //   POST
+
+  // route to update
+
+        //   PUT
+
+  // route to delete
+
 
 // Default response for any other request (Not Found)
 app.use((req, res) => {
