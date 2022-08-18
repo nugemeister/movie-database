@@ -2,6 +2,8 @@ const express = require('express');
 // Import and require mysql2
 const mysql = require('mysql2');
 
+const path = require('path');
+
 const PORT = process.env.PORT || 3001;
 const app = express();
 
@@ -25,17 +27,21 @@ const db = mysql.createConnection(
 // Query database
 
 
-// db.query(`PLACEHOLDER EXPRESSION`, (err, result) => {
-//   if (err) {
-//     console.log(err);
-//   }
-//   console.log(result);
-// });
-
-// Query database
-// db.query('SELECT * FROM favorite_books', function (err, results) {
-//   console.log(results);
-// });
+// Read all movies
+app.get('/api/movies', (req, res) => {
+    const sql = `SELECT id, movie_name AS title FROM movies`;
+    
+    db.query(sql, (err, rows) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+         return;
+      }
+      res.json({
+        message: 'success',
+        data: rows
+      });
+    });
+  });
 
 // Default response for any other request (Not Found)
 app.use((req, res) => {
